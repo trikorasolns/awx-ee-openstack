@@ -41,11 +41,13 @@ AWX_EE_OPENSTACK_VERSION=0.0.1
 ansible-builder build --tag awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
 ----
 
+
+
 [source,]
 ----
 Running command:
-  podman build -f context/Containerfile -t xxxxxxxx/awx-ee-glpi:0.0.1 context
-Complete! The build context can be found at: /mnt/e/Projekte/Ansible/awx-ee/context
+  podman build -f context/Containerfile -t awx-ee-openstack:0.0.1 context
+Complete! The build context can be found at: /z/dev/enterprise/oss/awx-ee-openstack/contex
 ----
 
 [source,bash]
@@ -56,7 +58,7 @@ podman image ls | grep ee
 [source,]
 ----
 REPOSITORY                                   TAG                  IMAGE ID      CREATED         SIZE
-localhost/xxxxxxxx/awx-ee-glpi          0.0.1                0dfd4e306b8a  5 minutes ago   1.1 GB
+localhost/awx-ee-openstack          0.0.1                0dfd4e306b8a  5 minutes ago   1.1 GB
 ----
 
 === Push the image to Quay.io
@@ -85,12 +87,12 @@ buildah images
 [source,bash]
 ----
 REPOSITORY                       TAG    IMAGE ID       CREATED          SIZE
-localhost/xxxxxxxx/awx-ee-glpi   0.0.1  0dfd4e306b8a   4 minutes ago    1.1 GB
+localhost/xxxxxxxx/awx-ee-openstack   0.0.1  0dfd4e306b8a   4 minutes ago    1.1 GB
 ----
 
 [source,bash]
 ----
-buildah push localhost/xxxxxxxx/awx-ee-glpi:${AWX_GLPI_VERSION} docker://quay.io/trikorasolns/awx-ee-glpi:${AWX_GLPI_VERSION}
+buildah push localhost/xxxxxxxx/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION} docker://quay.io/trikorasolns/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
 ----
 
 If the `push` succeeds the output should end with:
@@ -101,7 +103,7 @@ Writing manifest to image destination
 Storing signatures
 ----
 
-And the container will be available at https://quay.io/repository/trikorasolns/awx-ee-glpi.
+And the container will be available at https://quay.io/repository/trikorasolns/awx-ee-openstack.
 
 [NOTE]
 ====
@@ -110,51 +112,5 @@ To also tag the image as the `latest` image to:
 
 [source,bash]
 ----
-buildah push localhost/xxxxxxxx/awx-ee-glpi:${AWX_GLPI_VERSION} docker://quay.io/trikorasolns/awx-ee-glpi:latest
+buildah push localhost/xxxxxxxx/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION} docker://quay.io/trikorasolns/awx-ee-openstack:latest
 ----
-
-== Troubleshooting
-
-=== Error creating pod: container failed to start, ImagePullBackOff
-
-*Problem*
-
-Error creating pod: container failed to start, ImagePullBackOff
-
-*Symptoms*
-
-[source,bash]
-----
-$ kubectl -n awx get all
-NAME                                                   READY   STATUS         RESTARTS       AGE
-pod/automation-job-28-cftwg                            0/1     ErrImagePull   0              34s
-----
-
-[source,bash]
-----
-$ kubectl -n awx describe pod/automation-job-28-cftwg
-...
-  Type     Reason     Age               From               Message
-  ----     ------     ----              ----               -------
-  Normal   Scheduled  21s               default-scheduler  Successfully assigned awx/automation-job-28-cftwg to awx.localdomain
-  Normal   BackOff    16s               kubelet            Back-off pulling image "quay.io/trikorasolns/awx-ee-glpi:latest"
-  Warning  Failed     16s               kubelet            Error: ImagePullBackOff
-  Normal   Pulling    4s (x2 over 19s)  kubelet            Pulling image "quay.io/trikorasolns/awx-ee-glpi:latest"
-  Warning  Failed     3s (x2 over 17s)  kubelet            Failed to pull image "quay.io/trikorasolns/awx-ee-glpi:latest": rpc error: code = Unknown desc = Error response from daemon: manifest for quay.io/trikorasolns/awx-ee-glpi:latest not found: manifest unknown: manifest unknown
-  Warning  Failed     3s (x2 over 17s)  kubelet            Error: ErrImagePull
-----
-
-*Cause*
-
-The `latest` tag doesn't exist.
-
-*Solution*
-
-Either push the image as the `latest` tag or replace with the correct version.
-
-
-== References
-
-* https://thedatabaseme.de/2022/09/09/self-build-awx-execution-environment/
- 
-

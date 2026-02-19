@@ -6,4 +6,5 @@ collections:
   - name: redhatinsights.insights
   - name: openstack.cloud
     version: 2.5.0
+  - name: community.dns
 ...
