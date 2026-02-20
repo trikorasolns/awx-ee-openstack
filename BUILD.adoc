@@ -58,7 +58,7 @@ podman image ls | grep ee
 [source,]
 ----
 REPOSITORY                                   TAG                  IMAGE ID      CREATED         SIZE
-localhost/awx-ee-openstack          0.0.1                0dfd4e306b8a  5 minutes ago   1.1 GB
+localhost/awx-ee-openstack          0.0.1                xxxxxxxxxxxx  5 minutes ago   1.1 GB
 ----
 
 === Push the image to Quay.io
@@ -92,7 +92,7 @@ localhost/xxxxxxxx/awx-ee-openstack   0.0.1  0dfd4e306b8a   4 minutes ago    1.1
 
 [source,bash]
 ----
-buildah push localhost/xxxxxxxx/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION} docker://quay.io/trikorasolns/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
+buildah push localhost/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION} docker://quay.io/trikorasolns/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
 ----
 
 If the `push` succeeds the output should end with:
