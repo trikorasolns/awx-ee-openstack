@@ -6,6 +6,13 @@ on:
       tag:
         description: 'Tag to be published to quay.io'
         required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
 
 jobs:
   publish:
