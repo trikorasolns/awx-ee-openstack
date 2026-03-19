@@ -41,8 +41,6 @@ AWX_EE_OPENSTACK_VERSION=0.0.1
 ansible-builder build --tag awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
 ----
 
-
-
 [source,]
 ----
 Running command:
@@ -112,5 +110,5 @@ To also tag the image as the `latest` image to:
 
 [source,bash]
 ----
-buildah push localhost/xxxxxxxx/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION} docker://quay.io/trikorasolns/awx-ee-openstack:latest
+buildah push localhost/awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION} docker://quay.io/trikorasolns/awx-ee-openstack:latest
 ----
