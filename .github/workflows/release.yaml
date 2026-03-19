@@ -34,8 +34,8 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           path: ${{ env.context }}
-          registry: ${{ secrets.REGISTRY_SERVER }}
-          repository: ${{ secrets.REGISTRY_NAMESPACE }}/${{ env.image_name }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: quay.io
+          repository: trikorasolns/awx-ee-openstack
+          username: ${{ secrets.QUAY_IO_USER }}
+          password: ${{ secrets.QUAY_IO_PASSWORD }}
           tags: "${{ steps.image_tags.outputs.IMAGE_TAGS }}"
