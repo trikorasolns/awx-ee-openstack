@@ -32,7 +32,7 @@ jobs:
           ansible-galaxy collection install -r requirements.yml
       - name: Execute Ansible Builder
         run: |
-          ansible-builder build --tag awx-ee-openstack:${{ github.event.inputs.tag }}
+          ansible-builder build --tag awx-ee-openstack:${{ github.event.inputs.tag }} --tag awx-ee-openstack:latest
       - name: Push To quay.io
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
