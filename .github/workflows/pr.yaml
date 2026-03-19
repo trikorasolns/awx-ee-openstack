@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          ansible-galaxy collection install -r requirements.yaml
+          ansible-galaxy collection install -r requirements.yml
       - name: Execute Ansible Builder
         run: |
           ansible-builder build --tag awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
