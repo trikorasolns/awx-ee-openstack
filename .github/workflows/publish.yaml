@@ -33,11 +33,12 @@ jobs:
       - name: Execute Ansible Builder
         run: |
           ansible-builder build --tag awx-ee-openstack:${{ github.event.inputs.tag }}
-      - name: Publish image to quay.io
-        uses: docker/build-push-action@v2
+      - name: Push To quay.io
+        id: push-to-quay
+        uses: redhat-actions/push-to-registry@v2
         with:
           registry: quay.io/trikorasolns
           image: awx-ee-openstack
-          tags: "${{ github.event.inputs.tag }} ${{ github.event.inputs.tag }}"
+          tags: "${{ github.event.inputs.tag }} latest"
           username: ${{ secrets.QUAY_IO_USER }}
           password: ${{ secrets.QUAY_IO_PASSWORD }}
