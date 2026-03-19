@@ -13,10 +13,6 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-    strategy:
-      matrix:
-        python-version: ["3.13"]
-    steps:
       - name: Create tag
         uses: actions/github-script@v5
         with:
