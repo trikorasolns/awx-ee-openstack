@@ -11,10 +11,6 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-    strategy:
-      matrix:
-        python-version: ["3.13"]
-    steps:
       # Important: This sets up your GITHUB_WORKSPACE environment variable
       - uses: actions/checkout@v4
         with:
