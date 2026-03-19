@@ -26,9 +26,9 @@ jobs:
         python-version: ["3.11"]
     steps:
       - name: "Install Ansible"
-        uses: alex-oleshkevich/setup-ansible@version 
-        with:
-          version: "v1.0.1"
+        uses: alex-oleshkevich/setup-ansible@v1.0.1 
+        # with:
+        #   version: "v1.0.1"
       # Important: This sets up your GITHUB_WORKSPACE environment variable
       - uses: actions/checkout@v3
         with:
