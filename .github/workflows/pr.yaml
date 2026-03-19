@@ -45,7 +45,7 @@ jobs:
           ansible-galaxy collection install -r requirements.yml
       - name: Execute Ansible Builder
         run: |
-          ansible-builder build --tag awx-ee-openstack:${AWX_EE_OPENSTACK_VERSION}
+          ansible-builder build --tag awx-ee-openstack
   #     - name: Run ansible-lint
   #       # replace `main` with any valid ref, or tags like `v6`
   #       uses: ansible/ansible-lint-action@main
