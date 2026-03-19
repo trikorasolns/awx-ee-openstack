@@ -29,13 +29,10 @@ jobs:
           ansible-galaxy collection install -r requirements.yml
       - name: Execute Ansible Builder
         run: |
-          ansible-builder build --tag awx-ee-openstack
-      - name: Build and publish image to Quay
+          ansible-builder build --tag awx-ee-openstack:${{ github.ref }}
+      - name: Publish image to quay.io
         uses: docker/build-push-action@v1
         with:
-          path: ${{ env.context }}
-          registry: quay.io
-          repository: trikorasolns/awx-ee-openstack
-          username: ${{ secrets.QUAY_IO_USER }}
-          password: ${{ secrets.QUAY_IO_PASSWORD }}
-          tags: "${{ steps.image_tags.outputs.IMAGE_TAGS }}"
+          registry: quay.io/trikorasolns
+          image: awx-ee-openstack
+          tags: "${{ github.ref }} ${{ github.ref }}"
