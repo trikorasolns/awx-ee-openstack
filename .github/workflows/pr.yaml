@@ -28,7 +28,7 @@ jobs:
       - name: "Install Ansible"
         uses: alex-oleshkevich/setup-ansible@VERSION 
         with:
-          version: "9.3.0"
+          version: "v1.0.1"
       # Important: This sets up your GITHUB_WORKSPACE environment variable
       - uses: actions/checkout@v3
         with:
